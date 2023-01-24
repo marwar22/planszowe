@@ -1,18 +1,19 @@
-<script>
+<script lang="ts">
 	import Header from './Header.svelte';
+	import type { LayoutServerData } from './$types';
 	import './styles.css';
+
+	export let data: LayoutServerData;
 </script>
 
 <div class="app">
-	<Header />
+	<Header userInfo={data.userInfo} />
 
 	<main>
 		<slot />
 	</main>
 
-	<footer>
-		<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
-	</footer>
+	<footer>xd</footer>
 </div>
 
 <style>
@@ -39,10 +40,6 @@
 		justify-content: center;
 		align-items: center;
 		padding: 12px;
-	}
-
-	footer a {
-		font-weight: bold;
 	}
 
 	@media (min-width: 480px) {
