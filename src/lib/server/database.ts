@@ -35,51 +35,59 @@ const password = import.meta.env.VITE_PGPASSWORD;
 const port = Number(import.meta.env.VITE_PGPORT || 5432);
 
 export const sequelize = new Sequelize(
-	`postgres://${user}:${password}@${host}:${port}/${database}`
+    `postgres://${user}:${password}@${host}:${port}/${database}`
 );
 sequelize
-	.authenticate()
-	.then(() => {
-		console.log(`Database connected`);
-	})
-	.catch((err) => {
-		console.log(`Database connection error ${err}`);
-	});
+    .authenticate()
+    .then(() => {
+        console.log(`Database connected`);
+    })
+    .catch((err) => {
+        console.log(`Database connection error ${err}`);
+    });
 
 export const User = sequelize.define(
-	'User',
-	{
-		username: {
-			type: DataTypes.STRING,
-			unique: true,
-			allowNull: false
-		},
-		password: {
-			type: DataTypes.STRING,
-			allowNull: false
-		},
-		email: {
-			type: DataTypes.STRING,
-			unique: true,
-			allowNull: false
-		},
-		authToken: {
-			type: DataTypes.STRING
-		}
-	},
-	{ freezeTableName: true }
+    'User',
+    {
+        username: {
+            type: DataTypes.STRING,
+            unique: true,
+            allowNull: false
+        },
+        password: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        email: {
+            type: DataTypes.STRING,
+            unique: true,
+            allowNull: false
+        },
+        authToken: {
+            type: DataTypes.STRING
+        }
+    },
+    { freezeTableName: true }
 );
 
 export const BoardGame = sequelize.define(
-	'BoardGame',
-	{
-		name: {
-			type: DataTypes.STRING,
-			allowNull: false
-		}
-	},
-	{
-		freezeTableName: true
-	}
+    'BoardGame',
+    {
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        description: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        imageUrls: {
+            type: DataTypes.ARRAY(DataTypes.STRING),
+            allowNull: false
+        }
+    },
+    {
+        freezeTableName: true
+    }
 );
 await sequelize.sync();

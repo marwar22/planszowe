@@ -1,19 +1,30 @@
 <script lang="ts">
-	import type { UserInfo } from '../app';
+    import type { UserInfo } from '../app';
 
-	export let userInfo: UserInfo;
+    export let userInfo: UserInfo;
 </script>
 
-<div>
-	To jest header
-	<span>
-		{#if userInfo.loggedIn}
-			Zalogowano jako {userInfo.username}
-			<form action="/logout" method="POST">
-				<button type="submit">Log out</button>
-			</form>
-		{:else}
-			Nie zalogowano
-		{/if}
-	</span>
+<div class="header">
+    This isheader
+    <a href="/">home</a>
+    <div class="spacer" />
+    {#if userInfo.loggedIn}
+        <span>Logged as {userInfo.username}</span>
+        <form action="/logout" method="POST">
+            <button type="submit">Log out</button>
+        </form>
+    {:else}
+        <span>Not logged in</span>
+        <a href="/login">Log in</a>
+        <a href="/register">Register</a>
+    {/if}
 </div>
+
+<style>
+    .header {
+        display: flex;
+    }
+    .spacer {
+        flex: 1;
+    }
+</style>
