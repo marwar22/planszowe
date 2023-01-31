@@ -5,6 +5,26 @@
     $: boardGame = data.boardGame;
 </script>
 
-{#each boardGame.imageUrls as imageUrl}
-    <img src={imageUrl} alt="board game" />
-{/each}
+<div>
+    <h1>{boardGame.name}</h1>
+    <p>
+        {boardGame.description}
+    </p>
+    <div class="images">
+        {#each boardGame.imageUrls as imageUrl}
+            <img class="images__img" src={imageUrl} alt="board game" />
+        {/each}
+    </div>
+</div>
+
+<style>
+    .images {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .images__img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+</style>

@@ -1,6 +1,11 @@
 import { BoardGame } from '$lib/server/database';
 import { s3bucketName, s3boardgames } from '$lib/server/s3';
 import { fail, redirect, type Actions } from '@sveltejs/kit';
+import type { PageServerLoad } from '../$types';
+
+export const load = (async ({ locals }) => {
+    if (!locals.user?.loggedIn) throw redirect(302, '/login');
+}) satisfies PageServerLoad;
 
 export const actions: Actions = {
     create: async ({ request, locals }) => {
@@ -10,35 +15,48 @@ export const actions: Actions = {
         if (!name) return fail(400, { nameError: true });
         if (!description) return fail(400, { descriptionError: true });
 
-        const imageUrls: string[] = [];
         const promises = [];
+        const imageUrls: string[] = [];
+
         for (let i = 0; true; i++) {
             const image = data.get(`image${i}`) as File;
-            if (!image) break;
-            const uploadPromise = uploadImage(image);
+            if (!image || image.size <= 0) break;
+            const uploadPromise = uploadFile(image);
             imageUrls.push('');
             uploadPromise.then((imageUrl) => {
                 imageUrls[i] = imageUrl;
             });
             promises.push(uploadPromise);
         }
+        let rulesUrl: string | null = null;
+        const rules = data.get('rules') as File;
+        if (rules && rules.size > 0) {
+            const uploadPromise = uploadFile(rules);
+            rulesUrl = '';
+            uploadPromise.then((url) => {
+                rulesUrl = url;
+            });
+            promises.push(uploadPromise);
+        }
         await Promise.all(promises);
-        BoardGame.create({
+        const boardGame = await BoardGame.create({
             name,
             description,
-            imageUrls
+            imageUrls,
+            rulesUrl
         });
+        throw redirect(302, `/boardgames/${boardGame.dataValues.id}`);
     }
 };
 
-async function uploadImage(image: File) {
-    const imageUUID = crypto.randomUUID();
+async function uploadFile(file: File) {
+    const fileUUID = crypto.randomUUID();
 
     const re = /(?:\.([^.]+))?$/;
-    const extension = re.exec(image.name)![1];
-    const fileName = `${imageUUID}.${extension}`;
+    const extension = re.exec(file.name)![1];
+    const fileName = `${fileUUID}.${extension}`;
 
-    const arrayBuffer = await image.arrayBuffer();
+    const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
 
     await s3boardgames

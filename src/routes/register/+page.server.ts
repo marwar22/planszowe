@@ -31,7 +31,7 @@ export const actions: Actions = {
             return fail(400, { usernameTaken: true });
         }
         const user2 = await User.findOne({ where: { email } });
-        if (email) {
+        if (user2) {
             return fail(400, { emailTaken: true });
         }
 

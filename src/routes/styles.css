@@ -42,6 +42,8 @@ button:active {
 }
 
 input[type='text'],
+input[type='password'],
+input[type='email'],
 textarea {
     box-sizing: border-box;
     background-color: var(--color-input-bg);
@@ -52,6 +54,8 @@ textarea {
     font-size: 1.2rem;
 }
 input[type='text']:focus,
+input[type='password']:focus,
+input[type='email']:focus,
 textarea:focus {
     outline: none;
     box-shadow: 1px 1px 5px -2px rgba(0, 0, 0, 1);
@@ -60,4 +64,10 @@ textarea:focus {
 button:focus:not(button:hover) {
     outline: 2px solid black;
     /* box-shadow: 3px 3px 5px -2px rgba(0, 0, 0, 1); */
+}
+a {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
 }

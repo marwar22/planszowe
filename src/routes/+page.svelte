@@ -8,6 +8,7 @@
 
 <div class="test">
     <a href="/boardgames/create">Create BoardGame</a>
+    <a href="/parties/create">Create party</a>
 </div>
 
 <style>

@@ -9,7 +9,7 @@
     <a href="/">home</a>
     <div class="spacer" />
     {#if userInfo.loggedIn}
-        <span>Logged as {userInfo.username}</span>
+        <a href="/account">Logged as {userInfo.username}</a>
         <form action="/logout" method="POST">
             <button type="submit">Log out</button>
         </form>

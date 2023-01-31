@@ -69,7 +69,15 @@ export const User = sequelize.define(
     },
     { freezeTableName: true }
 );
-
+export const UserFriend = sequelize.define(
+    'UserFriend',
+    {},
+    {
+        freezeTableName: true,
+        timestamps: false
+    }
+);
+User.belongsToMany(User, { as: 'Friend', through: UserFriend });
 export const BoardGame = sequelize.define(
     'BoardGame',
     {
@@ -84,10 +92,49 @@ export const BoardGame = sequelize.define(
         imageUrls: {
             type: DataTypes.ARRAY(DataTypes.STRING),
             allowNull: false
+        },
+        rulesUrl: {
+            type: DataTypes.STRING
         }
     },
     {
         freezeTableName: true
     }
 );
+
+export const Party = sequelize.define(
+    'Party',
+    {
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        description: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        date: {
+            type: DataTypes.DATE,
+            allowNull: false
+        },
+        emailSent: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        }
+    },
+    {
+        freezeTableName: true
+    }
+);
+export const BoardgameParty = sequelize.define(
+    'BoardgameParty',
+    {},
+    {
+        freezeTableName: true,
+        timestamps: false
+    }
+);
+
+BoardGame.belongsToMany(Party, { through: 'BoardgameParty' });
+Party.belongsToMany(BoardGame, { through: 'BoardgameParty' });
 await sequelize.sync();

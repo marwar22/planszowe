@@ -4,7 +4,7 @@
     export let form: ActionData;
 
     let images: (FileList | null)[] = [null];
-
+    let rules: FileList | null = null;
     $: console.log(images);
     $: {
         const lastIndex = images.length - 1;
@@ -43,7 +43,7 @@
     {#each images as image, index}
         <input
             class="file__input"
-            bind:files={images[index]}
+            bind:files={image}
             type="file"
             name="image{index}"
             accept="image/png, image/jpeg, image/jpg, image/webp"
@@ -52,6 +52,7 @@
     Rules
     <input
         class="file__input"
+        bind:files={rules}
         type="file"
         name="rules"
         accept="image/png, image/jpeg, image/jpg, image/webp, application/pdf"
