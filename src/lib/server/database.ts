@@ -35,7 +35,8 @@ const password = import.meta.env.VITE_PGPASSWORD;
 const port = Number(import.meta.env.VITE_PGPORT || 5432);
 
 export const sequelize = new Sequelize(
-    `postgres://${user}:${password}@${host}:${port}/${database}`
+    `postgres://${user}:${password}@${host}:${port}/${database}`,
+    { logging: false }
 );
 sequelize
     .authenticate()
@@ -126,6 +127,18 @@ export const Party = sequelize.define(
         freezeTableName: true
     }
 );
+export const UserParty = sequelize.define(
+    'UserParty',
+    {},
+    {
+        freezeTableName: true,
+        timestamps: false
+    }
+);
+
+User.belongsToMany(Party, { through: 'UserParty' });
+Party.belongsToMany(User, { through: 'UserParty' });
+
 export const BoardgameParty = sequelize.define(
     'BoardgameParty',
     {},
@@ -137,4 +150,5 @@ export const BoardgameParty = sequelize.define(
 
 BoardGame.belongsToMany(Party, { through: 'BoardgameParty' });
 Party.belongsToMany(BoardGame, { through: 'BoardgameParty' });
+
 await sequelize.sync();

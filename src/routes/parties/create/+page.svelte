@@ -4,6 +4,7 @@
     export let form: ActionData;
     export let data: PageServerData;
     $: friends = data.friends;
+    $: boardgames = data.boardgames;
 </script>
 
 <form class="form" action="?/create" method="POST" enctype="multipart/form-data">
@@ -19,14 +20,25 @@
     </label>
     {#if form?.descriptionError}Description can't be empty{/if}
     <label class="form__checkbox-label">
+        Date
+        <input class="form__date" name="date" type="datetime-local" />
+    </label>
+    <label class="form__checkbox-label">
         Send email
         <input class="form__checkbox" name="sendemails" type="checkbox" />
     </label>
     <h2>Invited Friends</h2>
     {#each friends as friend}
         <label class="form__checkbox-label">
-            <input class="form__checkbox" type="checkbox" />
+            <input class="form__checkbox" name="friend{friend.id}" type="checkbox" />
             {friend.username}
+        </label>
+    {/each}
+    <h2>Board Games</h2>
+    {#each boardgames as boardgame}
+        <label class="form__checkbox-label">
+            <input class="form__checkbox" name="boardgame{boardgame.id}" type="checkbox" />
+            {boardgame.name}
         </label>
     {/each}
 

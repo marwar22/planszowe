@@ -7,7 +7,7 @@ export const load: PageServerLoad = async ({ cookies, locals }) => {
 
 export const actions: Actions = {
     default({ cookies, locals }) {
-        locals.user = { username: '', userId: -1, loggedIn: false };
+        locals.user = { username: '', userId: -1, loggedIn: false, email: '' };
         cookies.set('session', '', {
             path: '/',
             secure: process.env.NODE_ENV === 'production',

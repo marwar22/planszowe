@@ -5,6 +5,7 @@ import type { PoolClient } from 'pg';
 // for information about these interfaces
 export type UserInfo = {
     username: string;
+    email: string;
     userId: number;
     loggedIn: boolean;
 };
