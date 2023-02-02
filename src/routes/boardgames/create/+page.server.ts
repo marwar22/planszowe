@@ -9,6 +9,7 @@ export const load = (async ({ locals }) => {
 
 export const actions: Actions = {
     create: async ({ request, locals }) => {
+        console.log('Got request');
         const data = await request.formData();
         const name = data.get('name');
         const description = data.get('description');
@@ -20,7 +21,7 @@ export const actions: Actions = {
 
         const promises = [];
         const imageUrls: string[] = [];
-
+        console.log('1abc');
         for (let i = 0; true; i++) {
             const image = data.get(`image${i}`) as File;
             if (!image || image.size <= 0) break;
@@ -33,6 +34,7 @@ export const actions: Actions = {
         }
         let rulesUrl: string | null = null;
         const rules = data.get('rules') as File;
+        console.log('2abc');
         if (rules && rules.size > 0) {
             const uploadPromise = uploadFile(rules);
             rulesUrl = '';
@@ -53,6 +55,7 @@ export const actions: Actions = {
 };
 
 async function uploadFile(file: File) {
+    console.log('3abc uploading file');
     const fileUUID = crypto.randomUUID();
 
     const re = /(?:\.([^.]+))?$/;
@@ -69,5 +72,6 @@ async function uploadFile(file: File) {
             Body: buffer
         })
         .promise();
+    console.log('4abc uploaded file');
     return `https://s3boardgames.s3.eu-central-1.amazonaws.com/${fileName}`;
 }
