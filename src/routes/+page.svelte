@@ -12,13 +12,13 @@
 </svelte:head>
 
 <div class="menu">
-    <a class="link" href="/boardgames/create">
-        <CheckerboardPlus {size} />
-        <span class="link__span">Add Board Game</span>
-    </a>
     <a class="link" href="/boardgames">
         <Checkerboard {size} />
         <span class="link__span">Board Games</span>
+    </a>
+    <a class="link" href="/boardgames/create">
+        <CheckerboardPlus {size} />
+        <span class="link__span">Add Board Game</span>
     </a>
     <a class="link" href="/parties/">
         <AccountMultiple {size} />

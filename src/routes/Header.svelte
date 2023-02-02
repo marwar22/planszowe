@@ -2,6 +2,10 @@
     import type { UserInfo } from '../app';
     import Home from 'svelte-material-icons/Home.svelte';
     import Account from 'svelte-material-icons/Account.svelte';
+    import Checkerboard from 'svelte-material-icons/Checkerboard.svelte';
+    import CheckerboardPlus from 'svelte-material-icons/CheckerboardPlus.svelte';
+    import AccountMultiple from 'svelte-material-icons/AccountMultiple.svelte';
+    import AccountMultiplePlus from 'svelte-material-icons/AccountMultiplePlus.svelte';
     import { goto } from '$app/navigation';
     export let userInfo: UserInfo;
     function login() {
@@ -15,6 +19,18 @@
 
 <div class="header">
     <a class="home" href="/"><Home {size} /></a>
+    <a class="link" href="/boardgames">
+        <Checkerboard {size} />
+    </a>
+    <a class="link" href="/boardgames/create">
+        <CheckerboardPlus {size} />
+    </a>
+    <a class="link" href="/parties/">
+        <AccountMultiple {size} />
+    </a>
+    <a class="link" href="/parties/create">
+        <AccountMultiplePlus {size} />
+    </a>
     <div class="spacer" />
     {#if userInfo.loggedIn}
         <a class="account__link" href="/account"> <Account {size} />{userInfo.username}</a>
@@ -36,6 +52,11 @@
         display: flex;
         align-items: center;
         border-bottom: 1px solid var(--color-primary-border);
+    }
+    .link {
+        display: flex;
+        align-items: center;
+        margin-left: 0.5rem;
     }
     .account__link {
         display: flex;

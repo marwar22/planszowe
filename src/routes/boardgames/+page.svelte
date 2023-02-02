@@ -51,6 +51,7 @@
         background-color: #e5e5e5;
     }
     .boardgame__image {
+        margin-right: 1rem;
         height: 10rem;
         max-height: 10rem;
     }

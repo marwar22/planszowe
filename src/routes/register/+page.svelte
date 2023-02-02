@@ -6,7 +6,7 @@
 
 <form class="form" action="?/register" method="POST">
     <h1>Register</h1>
-    ~
+
     <label for="username">
         Username
         <input id="username" name="username" type="text" required />

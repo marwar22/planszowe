@@ -15,12 +15,17 @@ export const findFriendIds = async (userId: number) => {
     friendIds.push(userId);
     return friendIds;
 };
-export const findPotentialFriends = async (userId: number, limit: number | undefined) => {
+export const findPotentialFriends = async (
+    userId: number,
+    limit: number | undefined,
+    friendUsername: string | undefined
+) => {
     const friendIds = await findFriendIds(userId);
     const users = (
         await User.findAll({
             where: {
-                id: { [Op.notIn]: friendIds }
+                id: { [Op.notIn]: friendIds },
+                username: { [Op.like]: `%${friendUsername}%` }
             },
             limit: limit
         })

@@ -16,7 +16,7 @@
     {#if form?.nameError}Name can't be empty{/if}
     <label>
         Description
-        <textarea class="description__textarea" name="description" />
+        <textarea class="description__textarea" name="description" rows="6" />
     </label>
     {#if form?.descriptionError}Description can't be empty{/if}
     <label class="form__checkbox-label">

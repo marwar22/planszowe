@@ -59,7 +59,7 @@ export const actions: Actions = {
 
         let participantsHTML = `<ul>`;
         participantsHTML += `<li>${locals.user!.username}</li>`;
-        for (const friend of friends) {
+        for (const friend of [{ id: userId, username: locals.user!.username }, ...friends]) {
             UserParty.create({ UserId: friend.id, PartyId: party.dataValues.id });
             participantsHTML += `<li>${friend.username}</li>`;
         }
@@ -89,7 +89,7 @@ export const actions: Actions = {
                 attachmentPromises.push(promise);
             }
             const attachments = await Promise.all(attachmentPromises);
-            const body = `${locals.user?.username} invited you to "${name}" on ${date}.<br><h2>Board Games</h2>${boardgamesHTML}<h2><h2>Participants</h2>${participantsHTML}<h2>Description</h2>${description}`;
+            const body = `<h1>${name}</h1>${locals.user?.username} invited you to "${name}" on ${date}.<br><h3>Description</h3>${description}<h3>Participants</h3>${participantsHTML}<h3>Board Games</h3>${boardgamesHTML}`;
             try {
                 console.log(
                     `sending EMAIL to ${JSON.stringify(emails)} with ${JSON.stringify(boardgames)}`

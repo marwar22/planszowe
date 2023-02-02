@@ -37,7 +37,7 @@
     {#if form?.nameTaken}Name is already in use{/if}
     <label>
         Description
-        <textarea class="description__textarea" name="description" />
+        <textarea class="description__textarea" name="description" rows="6" />
     </label>
 
     {#if form?.descriptionError}Description can't be empty{/if}
