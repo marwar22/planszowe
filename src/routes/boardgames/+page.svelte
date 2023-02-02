@@ -6,6 +6,7 @@
 </script>
 
 <div class="boardgames" />
+<h1>Board Games</h1>
 {#each boardGames as boardGame}
     <a class="boardgame" href="/boardgames/{boardGame.id}">
         <h2 class="boardgame__name">{boardGame.name}</h2>
