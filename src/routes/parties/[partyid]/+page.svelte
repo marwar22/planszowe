@@ -3,7 +3,6 @@
 
     export let data: PageServerData;
     $: party = data.party;
-    $: console.log(party);
 </script>
 
 <div>

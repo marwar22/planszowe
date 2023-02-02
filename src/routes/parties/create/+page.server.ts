@@ -89,7 +89,8 @@ export const actions: Actions = {
                 attachmentPromises.push(promise);
             }
             const attachments = await Promise.all(attachmentPromises);
-            const body = `<h1>${name}</h1>${locals.user?.username} invited you to "${name}" on ${date}.<br><h3>Description</h3>${description}<h3>Participants</h3>${participantsHTML}<h3>Board Games</h3>${boardgamesHTML}`;
+            const link = `View <a href="http://18.156.57.186/parties/${party.dataValues.id}">${name}</a> at website.`;
+            const body = `<h1>${name}</h1>${locals.user?.username} invited you to "${name}" on ${date}.<br>${link}<br><h3>Description</h3>${description}<h3>Participants</h3>${participantsHTML}<h3>Board Games</h3>${boardgamesHTML}`;
             try {
                 console.log(
                     `sending EMAIL to ${JSON.stringify(emails)} with ${JSON.stringify(boardgames)}`

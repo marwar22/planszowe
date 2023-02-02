@@ -2,7 +2,7 @@ import { BoardGame, Party, User } from '$lib/server/database';
 import { redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
-export const load = (async ({ params }) => {
+export const load = (async ({ locals, params }) => {
     const party = (
         await Party.findOne({
             include: [
