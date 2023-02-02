@@ -39,7 +39,7 @@
         background-color: white;
         border-radius: 1rem;
         border: 2px solid wheat;
-        margin: 1rem 0;
+        margin: 0.7rem 0;
         padding: 1rem;
         color: black;
         text-decoration: none;

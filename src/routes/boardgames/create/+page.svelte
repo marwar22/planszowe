@@ -33,11 +33,13 @@
         Name
         <input name="name" type="text" />
     </label>
+    {#if form?.nameError}Name can't be empty{/if}
+    {#if form?.nameTaken}Name is already in use{/if}
     <label>
         Description
         <textarea class="description__textarea" name="description" />
     </label>
-    {#if form?.nameError}Name can't be empty{/if}
+
     {#if form?.descriptionError}Description can't be empty{/if}
     Images
     {#each images as image, index}

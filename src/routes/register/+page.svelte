@@ -4,23 +4,23 @@
     export let form: ActionData;
 </script>
 
-<h1>Register</h1>
-
-<form action="?/register" method="POST">
-    <div>
-        <label for="username">Username</label>
+<form class="form" action="?/register" method="POST">
+    <h1>Register</h1>
+    ~
+    <label for="username">
+        Username
         <input id="username" name="username" type="text" required />
-    </div>
+    </label>
 
-    <div>
-        <label for="password">Password</label>
+    <label for="password">
+        Password
         <input id="password" name="password" type="password" required />
-    </div>
+    </label>
 
-    <div>
-        <label for="email">Email</label>
+    <label for="email">
+        Email
         <input id="email" name="email" type="email" required />
-    </div>
+    </label>
 
     {#if form?.usernameTaken}
         <p class="error">Username is taken.</p>
@@ -29,5 +29,33 @@
         <p class="error">Email is taken.</p>
     {/if}
 
-    <button type="submit">Register</button>
+    <button class="register__button" type="submit">Register</button>
 </form>
+
+<style>
+    .form {
+        display: flex;
+        width: 100%;
+        flex: 1;
+        margin-bottom: 6rem;
+        align-self: center;
+        justify-content: flex-end;
+        max-width: 32rem;
+        flex-direction: column;
+        justify-content: center;
+        align-items: stretch;
+        font-size: 1.2rem;
+    }
+    h1 {
+        font-size: 2.5rem;
+        align-self: center;
+    }
+    label {
+        display: flex;
+        flex-direction: column;
+    }
+    .register__button {
+        font-size: 1.3rem;
+        padding: 0.6rem;
+    }
+</style>

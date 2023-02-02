@@ -1,30 +1,51 @@
 <script lang="ts">
     import type { UserInfo } from '../app';
-
+    import Home from 'svelte-material-icons/Home.svelte';
+    import Account from 'svelte-material-icons/Account.svelte';
+    import { goto } from '$app/navigation';
     export let userInfo: UserInfo;
+    function login() {
+        goto('/login');
+    }
+    function register() {
+        goto('/register');
+    }
+    const size = '2rem';
 </script>
 
 <div class="header">
-    This isheader
-    <a href="/">home</a>
+    <a class="home" href="/"><Home {size} /></a>
     <div class="spacer" />
     {#if userInfo.loggedIn}
-        <a href="/account">Logged as {userInfo.username}</a>
+        <a class="account__link" href="/account"> <Account {size} />{userInfo.username}</a>
         <form action="/logout" method="POST">
-            <button type="submit">Log out</button>
+            <button class="header__button" type="submit">Log out</button>
         </form>
     {:else}
-        <span>Not logged in</span>
-        <a href="/login">Log in</a>
-        <a href="/register">Register</a>
+        <button class="header__button" on:click={login}>Log in</button>
+        <button class="header__button" on:click={register}>Register</button>
     {/if}
 </div>
 
 <style>
+    .home {
+        padding: 0.3rem;
+        display: flex;
+    }
     .header {
         display: flex;
+        align-items: center;
+        border-bottom: 1px solid var(--color-primary-border);
+    }
+    .account__link {
+        display: flex;
+        align-items: center;
+        margin-right: 0.8rem;
     }
     .spacer {
         flex: 1;
+    }
+    .header__button {
+        margin-right: 0.5rem;
     }
 </style>

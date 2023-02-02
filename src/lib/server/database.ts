@@ -87,7 +87,7 @@ export const BoardGame = sequelize.define(
             allowNull: false
         },
         description: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: false
         },
         imageUrls: {
@@ -111,7 +111,7 @@ export const Party = sequelize.define(
             allowNull: false
         },
         description: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: false
         },
         date: {

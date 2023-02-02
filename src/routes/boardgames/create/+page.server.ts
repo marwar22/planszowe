@@ -15,6 +15,9 @@ export const actions: Actions = {
         if (!name) return fail(400, { nameError: true });
         if (!description) return fail(400, { descriptionError: true });
 
+        const user = await BoardGame.findOne({ where: { name } });
+        if (user) return fail(400, { nameTaken: true });
+
         const promises = [];
         const imageUrls: string[] = [];
 

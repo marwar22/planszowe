@@ -1,29 +1,57 @@
 <script lang="ts">
-	import type { ActionData } from './$types';
+    import type { ActionData } from './$types';
 
-	export let form: ActionData;
+    export let form: ActionData;
 </script>
 
-<h1>Login</h1>
+<form class="form" action="?/login" method="POST">
+    <h1>Login</h1>
 
-<form action="?/login" method="POST">
-	<div>
-		<label for="username">Username</label>
-		<input id="username" name="username" type="text" required />
-	</div>
+    <label for="username">
+        Username
+        <input id="username" name="username" type="text" required />
+    </label>
 
-	<div>
-		<label for="password">Password</label>
-		<input id="password" name="password" type="password" required />
-	</div>
+    <label for="password">
+        Password
+        <input id="password" name="password" type="password" required />
+    </label>
 
-	{#if form?.invalid}
-		<p class="error">Username and password is required.</p>
-	{/if}
+    {#if form?.invalid}
+        <p class="error">Username and password is required.</p>
+    {/if}
 
-	{#if form?.credentialsError}
-		<p class="error">You have entered the wrong credentials.</p>
-	{/if}
+    {#if form?.credentialsError}
+        <p class="error">You have entered the wrong credentials.</p>
+    {/if}
 
-	<button type="submit">Log in</button>
+    <button class="login__button" type="submit">Log in</button>
 </form>
+
+<style>
+    .form {
+        display: flex;
+        width: 100%;
+        flex: 1;
+        margin-bottom: 6rem;
+        align-self: center;
+        justify-content: flex-end;
+        max-width: 32rem;
+        flex-direction: column;
+        justify-content: center;
+        align-items: stretch;
+        font-size: 1.2rem;
+    }
+    h1 {
+        font-size: 2.5rem;
+        align-self: center;
+    }
+    label {
+        display: flex;
+        flex-direction: column;
+    }
+    .login__button {
+        font-size: 1.3rem;
+        padding: 0.6rem;
+    }
+</style>

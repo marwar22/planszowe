@@ -14,7 +14,7 @@
     </main>
 
     <footer>
-        Boardgames website using AWS created by Marcin Wróbel for Introduction to cloud computing
+        Board Games website using AWS created by Marcin Wróbel for Introduction to cloud computing
         course at University of Wrocław
     </footer>
 </div>
@@ -38,6 +38,7 @@
     }
 
     footer {
+        border-top: 1px solid var(--color-primary-border);
         display: flex;
         flex-direction: column;
         justify-content: center;
